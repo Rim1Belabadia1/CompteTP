@@ -1,12 +1,12 @@
 package ma.projet.grpc.controllers;
 
-
 import io.grpc.stub.StreamObserver;
 import ma.projet.grpc.stubs.*;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @GrpcService
 public class CompteServiceImpl extends CompteServiceGrpc.CompteServiceImplBase {
@@ -67,6 +67,36 @@ public class CompteServiceImpl extends CompteServiceGrpc.CompteServiceImplBase {
         compteDB.put(id, compte);
 
         responseObserver.onNext(SaveCompteResponse.newBuilder().setCompte(compte).build());
+        responseObserver.onCompleted();
+    }
+
+    // Nouvelle méthode pour trouver des comptes par type
+    @Override
+    public void findByType(FindByTypeRequest request, StreamObserver<FindByTypeResponse> responseObserver) {
+        TypeCompte type = request.getType();
+        List<Compte> comptes = compteDB.values().stream()
+                .filter(compte -> compte.getType() == type)
+                .collect(Collectors.toList());
+
+        FindByTypeResponse response = FindByTypeResponse.newBuilder()
+                .addAllComptes(comptes)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    // Nouvelle méthode pour supprimer un compte par ID
+    @Override
+    public void deleteById(DeleteByIdRequest request, StreamObserver<DeleteByIdResponse> responseObserver) {
+        String id = request.getId();
+        boolean success = compteDB.remove(id) != null;
+
+        DeleteByIdResponse response = DeleteByIdResponse.newBuilder()
+                .setSuccess(success)
+                .build();
+
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

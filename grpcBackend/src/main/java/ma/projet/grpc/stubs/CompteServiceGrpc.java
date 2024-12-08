@@ -158,6 +158,70 @@ public final class CompteServiceGrpc {
      return getSaveCompteMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ma.projet.grpc.stubs.FindByTypeRequest,
+      ma.projet.grpc.stubs.FindByTypeResponse> getFindByTypeMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindByType",
+      requestType = ma.projet.grpc.stubs.FindByTypeRequest.class,
+      responseType = ma.projet.grpc.stubs.FindByTypeResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ma.projet.grpc.stubs.FindByTypeRequest,
+      ma.projet.grpc.stubs.FindByTypeResponse> getFindByTypeMethod() {
+    io.grpc.MethodDescriptor<ma.projet.grpc.stubs.FindByTypeRequest, ma.projet.grpc.stubs.FindByTypeResponse> getFindByTypeMethod;
+    if ((getFindByTypeMethod = CompteServiceGrpc.getFindByTypeMethod) == null) {
+      synchronized (CompteServiceGrpc.class) {
+        if ((getFindByTypeMethod = CompteServiceGrpc.getFindByTypeMethod) == null) {
+          CompteServiceGrpc.getFindByTypeMethod = getFindByTypeMethod = 
+              io.grpc.MethodDescriptor.<ma.projet.grpc.stubs.FindByTypeRequest, ma.projet.grpc.stubs.FindByTypeResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "CompteService", "FindByType"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ma.projet.grpc.stubs.FindByTypeRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ma.projet.grpc.stubs.FindByTypeResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new CompteServiceMethodDescriptorSupplier("FindByType"))
+                  .build();
+          }
+        }
+     }
+     return getFindByTypeMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<ma.projet.grpc.stubs.DeleteByIdRequest,
+      ma.projet.grpc.stubs.DeleteByIdResponse> getDeleteByIdMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeleteById",
+      requestType = ma.projet.grpc.stubs.DeleteByIdRequest.class,
+      responseType = ma.projet.grpc.stubs.DeleteByIdResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ma.projet.grpc.stubs.DeleteByIdRequest,
+      ma.projet.grpc.stubs.DeleteByIdResponse> getDeleteByIdMethod() {
+    io.grpc.MethodDescriptor<ma.projet.grpc.stubs.DeleteByIdRequest, ma.projet.grpc.stubs.DeleteByIdResponse> getDeleteByIdMethod;
+    if ((getDeleteByIdMethod = CompteServiceGrpc.getDeleteByIdMethod) == null) {
+      synchronized (CompteServiceGrpc.class) {
+        if ((getDeleteByIdMethod = CompteServiceGrpc.getDeleteByIdMethod) == null) {
+          CompteServiceGrpc.getDeleteByIdMethod = getDeleteByIdMethod = 
+              io.grpc.MethodDescriptor.<ma.projet.grpc.stubs.DeleteByIdRequest, ma.projet.grpc.stubs.DeleteByIdResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "CompteService", "DeleteById"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ma.projet.grpc.stubs.DeleteByIdRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ma.projet.grpc.stubs.DeleteByIdResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new CompteServiceMethodDescriptorSupplier("DeleteById"))
+                  .build();
+          }
+        }
+     }
+     return getDeleteByIdMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -228,6 +292,26 @@ public final class CompteServiceGrpc {
       asyncUnimplementedUnaryCall(getSaveCompteMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     * Nouvelle méthode pour trouver des comptes par type
+     * </pre>
+     */
+    public void findByType(ma.projet.grpc.stubs.FindByTypeRequest request,
+        io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.FindByTypeResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getFindByTypeMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour supprimer un compte par ID
+     * </pre>
+     */
+    public void deleteById(ma.projet.grpc.stubs.DeleteByIdRequest request,
+        io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.DeleteByIdResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getDeleteByIdMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -258,6 +342,20 @@ public final class CompteServiceGrpc {
                 ma.projet.grpc.stubs.SaveCompteRequest,
                 ma.projet.grpc.stubs.SaveCompteResponse>(
                   this, METHODID_SAVE_COMPTE)))
+          .addMethod(
+            getFindByTypeMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                ma.projet.grpc.stubs.FindByTypeRequest,
+                ma.projet.grpc.stubs.FindByTypeResponse>(
+                  this, METHODID_FIND_BY_TYPE)))
+          .addMethod(
+            getDeleteByIdMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                ma.projet.grpc.stubs.DeleteByIdRequest,
+                ma.projet.grpc.stubs.DeleteByIdResponse>(
+                  this, METHODID_DELETE_BY_ID)))
           .build();
     }
   }
@@ -326,6 +424,28 @@ public final class CompteServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getSaveCompteMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour trouver des comptes par type
+     * </pre>
+     */
+    public void findByType(ma.projet.grpc.stubs.FindByTypeRequest request,
+        io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.FindByTypeResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getFindByTypeMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour supprimer un compte par ID
+     * </pre>
+     */
+    public void deleteById(ma.projet.grpc.stubs.DeleteByIdRequest request,
+        io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.DeleteByIdResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getDeleteByIdMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -387,6 +507,26 @@ public final class CompteServiceGrpc {
     public ma.projet.grpc.stubs.SaveCompteResponse saveCompte(ma.projet.grpc.stubs.SaveCompteRequest request) {
       return blockingUnaryCall(
           getChannel(), getSaveCompteMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour trouver des comptes par type
+     * </pre>
+     */
+    public ma.projet.grpc.stubs.FindByTypeResponse findByType(ma.projet.grpc.stubs.FindByTypeRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getFindByTypeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour supprimer un compte par ID
+     * </pre>
+     */
+    public ma.projet.grpc.stubs.DeleteByIdResponse deleteById(ma.projet.grpc.stubs.DeleteByIdRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getDeleteByIdMethod(), getCallOptions(), request);
     }
   }
 
@@ -454,12 +594,36 @@ public final class CompteServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getSaveCompteMethod(), getCallOptions()), request);
     }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour trouver des comptes par type
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ma.projet.grpc.stubs.FindByTypeResponse> findByType(
+        ma.projet.grpc.stubs.FindByTypeRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getFindByTypeMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * Nouvelle méthode pour supprimer un compte par ID
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ma.projet.grpc.stubs.DeleteByIdResponse> deleteById(
+        ma.projet.grpc.stubs.DeleteByIdRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getDeleteByIdMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ALL_COMPTES = 0;
   private static final int METHODID_COMPTE_BY_ID = 1;
   private static final int METHODID_TOTAL_SOLDE = 2;
   private static final int METHODID_SAVE_COMPTE = 3;
+  private static final int METHODID_FIND_BY_TYPE = 4;
+  private static final int METHODID_DELETE_BY_ID = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -493,6 +657,14 @@ public final class CompteServiceGrpc {
         case METHODID_SAVE_COMPTE:
           serviceImpl.saveCompte((ma.projet.grpc.stubs.SaveCompteRequest) request,
               (io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.SaveCompteResponse>) responseObserver);
+          break;
+        case METHODID_FIND_BY_TYPE:
+          serviceImpl.findByType((ma.projet.grpc.stubs.FindByTypeRequest) request,
+              (io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.FindByTypeResponse>) responseObserver);
+          break;
+        case METHODID_DELETE_BY_ID:
+          serviceImpl.deleteById((ma.projet.grpc.stubs.DeleteByIdRequest) request,
+              (io.grpc.stub.StreamObserver<ma.projet.grpc.stubs.DeleteByIdResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -559,6 +731,8 @@ public final class CompteServiceGrpc {
               .addMethod(getCompteByIdMethod())
               .addMethod(getTotalSoldeMethod())
               .addMethod(getSaveCompteMethod())
+              .addMethod(getFindByTypeMethod())
+              .addMethod(getDeleteByIdMethod())
               .build();
         }
       }

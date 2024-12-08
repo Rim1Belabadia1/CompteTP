@@ -68,6 +68,26 @@ message SaveCompteResponse {
   Compte compte = 1;
 }
 
+// Requête pour trouver des comptes par type
+message FindByTypeRequest {
+  TypeCompte type = 1;
+}
+
+// Réponse contenant la liste des comptes trouvés par type
+message FindByTypeResponse {
+  repeated Compte comptes = 1;
+}
+
+// Requête pour supprimer un compte par ID
+message DeleteByIdRequest {
+  string id = 1;
+}
+
+// Réponse pour la suppression d'un compte
+message DeleteByIdResponse {
+  bool success = 1; // Indique si la suppression a réussi
+}
+
 // Définition du service correspondant aux requêtes et mutations GraphQL
 service CompteService {
   // Équivalent de la requête allComptes
@@ -81,4 +101,10 @@ service CompteService {
 
   // Équivalent de la mutation saveCompte
   rpc SaveCompte(SaveCompteRequest) returns (SaveCompteResponse);
+
+  // Nouvelle méthode pour trouver des comptes par type
+  rpc FindByType(FindByTypeRequest) returns (FindByTypeResponse);
+
+  // Nouvelle méthode pour supprimer un compte par ID
+  rpc DeleteById(DeleteByIdRequest) returns (DeleteByIdResponse);
 }
